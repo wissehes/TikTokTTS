@@ -24,6 +24,21 @@ struct Voice: Hashable {
 
 typealias Voices = [String: [Voice]]
 
+extension Voices {
+    var array: Array<(key: String, value: [Voice])> {
+        return Array(voices).sorted(by: { $0.key < $1.key })
+    }
+    var allVoices: Array<Voice> {
+        var voicesArray: [Voice] = []
+        
+        for category in voices {
+            voicesArray.append(contentsOf: category.value)
+        }
+        
+        return voicesArray
+    }
+}
+
 // Thanks to https://github.com/oscie57/tiktok-voice/wiki/Voice-Codes
 let voices: Voices = [
     "Disney": [
