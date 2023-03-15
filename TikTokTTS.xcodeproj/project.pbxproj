@@ -11,6 +11,10 @@
 		8969C9F929C1ED09001A6865 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8969C9F829C1ED09001A6865 /* ContentView.swift */; };
 		8969C9FB29C1ED0B001A6865 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8969C9FA29C1ED0B001A6865 /* Assets.xcassets */; };
 		8969C9FE29C1ED0B001A6865 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8969C9FD29C1ED0B001A6865 /* Preview Assets.xcassets */; };
+		8969CA0929C1ED28001A6865 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8969CA0829C1ED28001A6865 /* MainView.swift */; };
+		8969CA0C29C1EE25001A6865 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8969CA0B29C1EE25001A6865 /* Alamofire */; };
+		8969CA1229C21EA3001A6865 /* TTSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8969CA1129C21EA3001A6865 /* TTSResponse.swift */; };
+		8969CA1629C22768001A6865 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8969CA1529C22768001A6865 /* Voices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,9 @@
 		8969C9FA29C1ED0B001A6865 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8969C9FD29C1ED0B001A6865 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8969C9FF29C1ED0B001A6865 /* TikTokTTS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TikTokTTS.entitlements; sourceTree = "<group>"; };
+		8969CA0829C1ED28001A6865 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8969CA1129C21EA3001A6865 /* TTSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSResponse.swift; sourceTree = "<group>"; };
+		8969CA1529C22768001A6865 /* Voices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8969CA0C29C1EE25001A6865 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,11 +60,14 @@
 		8969C9F529C1ED09001A6865 /* TikTokTTS */ = {
 			isa = PBXGroup;
 			children = (
+				8969CA1029C21E9A001A6865 /* Types */,
+				8969CA0529C1ED14001A6865 /* Views */,
 				8969C9F629C1ED09001A6865 /* TikTokTTSApp.swift */,
 				8969C9F829C1ED09001A6865 /* ContentView.swift */,
 				8969C9FA29C1ED0B001A6865 /* Assets.xcassets */,
 				8969C9FF29C1ED0B001A6865 /* TikTokTTS.entitlements */,
 				8969C9FC29C1ED0B001A6865 /* Preview Content */,
+				8969CA1529C22768001A6865 /* Voices.swift */,
 			);
 			path = TikTokTTS;
 			sourceTree = "<group>";
@@ -67,6 +78,22 @@
 				8969C9FD29C1ED0B001A6865 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8969CA0529C1ED14001A6865 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8969CA0829C1ED28001A6865 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8969CA1029C21E9A001A6865 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				8969CA1129C21EA3001A6865 /* TTSResponse.swift */,
+			);
+			path = Types;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +112,9 @@
 			dependencies = (
 			);
 			name = TikTokTTS;
+			packageProductDependencies = (
+				8969CA0B29C1EE25001A6865 /* Alamofire */,
+			);
 			productName = TikTokTTS;
 			productReference = 8969C9F329C1ED09001A6865 /* TikTokTTS.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +143,9 @@
 				Base,
 			);
 			mainGroup = 8969C9EA29C1ED09001A6865;
+			packageReferences = (
+				8969CA0A29C1EE25001A6865 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 8969C9F429C1ED09001A6865 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,7 +172,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8969CA1629C22768001A6865 /* Voices.swift in Sources */,
 				8969C9F929C1ED09001A6865 /* ContentView.swift in Sources */,
+				8969CA0929C1ED28001A6865 /* MainView.swift in Sources */,
+				8969CA1229C21EA3001A6865 /* TTSResponse.swift in Sources */,
 				8969C9F729C1ED09001A6865 /* TikTokTTSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +372,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8969CA0A29C1EE25001A6865 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8969CA0B29C1EE25001A6865 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8969CA0A29C1EE25001A6865 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8969C9EB29C1ED09001A6865 /* Project object */;
 }
