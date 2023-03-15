@@ -7,7 +7,8 @@
 
 import SwiftUI
 import Alamofire
-import AVKit
+//import AVKit
+import AVFoundation
 
 struct Constants {
     static let user_agent = "com.zhiliaoapp.musically/2022600030 (Linux; U; Android 7.1.2; es_ES; SM-G988N; Build/NRD90M;tt-ok/3.12.13.1)"
@@ -20,32 +21,82 @@ struct MainView: View {
     @StateObject var vm = MainViewModel()
     
     var body: some View {
-        Form {
-            TextField("Text", text: $vm.text)
-            Picker("Voice", selection: $vm.voice) {
-                ForEach(Array(voices).sorted(by: { $0.key < $1.key }), id: \.key) { category in
-                    Section(category.key) {
-                        ForEach(category.value, id: \.code) { voice in
-                            Text(voice.name)
-                                .tag(voice)
+        VStack {
+            GroupBox("Text to speech") {
+                Form {
+                    TextField("Text", text: $vm.text, prompt: Text("Enter text..."))
+                        .frame(maxWidth: 300)
+                    HStack {
+                        picker
+                            .frame(maxWidth: 300)
+                        Button("Random") {
+                            if let random = voices.allVoices.randomElement() {
+                                vm.voice = random
+                            }
                         }
                     }
-                }
+                    HStack {
+                        Button("Submit") {
+                            Task {
+                                do {
+                                    try await vm.load()
+                                } catch {
+                                    print(error)
+                                }
+                            }
+                        }.disabled(!vm.canTextToSpeech)
+                        
+                        if vm.isLoading {
+//                        if true {
+                            ProgressView()
+                                .scaleEffect(0.6)
+                                .frame(width: 10, height: 10)
+                        }
+                    }
+                    
+                }.padding()
+                    .frame(maxWidth: 400)
             }
             
-            Button("Get TTS") {
-                Task {
-                    do {
-                        try await vm.load()
-                    } catch {
-                        print(error)
+            player
+            
+        }.padding()
+            .frame(minWidth: 400, minHeight: 400)
+    }
+    
+    var player: some View {
+        GroupBox("Audio") {
+            HStack {
+                Button("Play") {
+                    vm.playSound()
+                }
+                
+                Button("Stop") {
+                    vm.player?.stop()
+                }
+                
+                Button("Save file") { vm.saveAudio() }
+                    .disabled(!vm.canTextToSpeech)
+            }.disabled(vm.data == nil)
+            .padding()
+            .frame(maxWidth: 400)
+        }
+    }
+    
+    var picker: some View {
+        Picker("Voice", selection: $vm.voice) {
+            // Iterate over sorted categories
+            ForEach(voices.array, id: \.key) { category in
+                // Create a section for each category
+                Section(category.key) {
+                    // Iterate over the category's voices
+                    ForEach(category.value, id: \.code) { voice in
+                        Text("\(category.key) - \(voice.name)")
+                            .tag(voice)
                     }
                 }
             }
-            
-            
-        }.padding()
-            .frame(minWidth: 100, minHeight: 250)
+        }
     }
 }
 
@@ -55,8 +106,25 @@ final class MainViewModel: ObservableObject {
     @Published var isLoading = false
     
     @Published var player: AVAudioPlayer?
+    @Published var playing = false
+    
+    @Published var data: Data?
+    
+    var canTextToSpeech: Bool {
+        text.count > 0 && text.count < 300
+    }
     
     func load() async throws {
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
+        
+        defer {
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+        }
+        
         let params: Parameters = [
             "voice": voice.code,
             "text": text,
@@ -70,22 +138,49 @@ final class MainViewModel: ObservableObject {
         )
         
         let response = try await request.serializingDecodable(TTSResponse.self).value
-
+        
         if let audio = response.audioData {
             DispatchQueue.main.async {
-                self.playSound(data: audio)
+                self.data = audio
             }
         }
     }
     
-    func playSound(data: Data) {
+    func playSound() {
+        guard let data = self.data else { return }
+        
         do {
             self.player = try .init(data: data)
             self.player?.play()
+//            self.player.se
         } catch {
             print(error)
         }
     }
+    
+    func saveAudio() {
+        guard let data = self.data else { return }
+        guard let fileURL = self.showSavePanel() else { return }
+        
+        try? data.write(to: fileURL)
+    }
+    
+    private func showSavePanel() -> URL? {
+
+        let savePanel = NSSavePanel()
+        savePanel.allowedContentTypes = [.mp3]
+        savePanel.canCreateDirectories = true
+        savePanel.isExtensionHidden = false
+        savePanel.title = "Save your text-to-speech file"
+        savePanel.message = "Choose a folder and a name to store the audio."
+        savePanel.nameFieldStringValue = "audio.mp3"
+//        savePanel.nameFieldLabel = "Image file name:"
+        
+        let response = savePanel.runModal()
+
+        return response == .OK ? savePanel.url : nil
+    }
+
 }
 
 struct MainView_Previews: PreviewProvider {
