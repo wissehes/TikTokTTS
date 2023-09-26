@@ -47,7 +47,6 @@ struct MainView: View {
                         }.disabled(!vm.canTextToSpeech)
                         
                         if vm.isLoading {
-//                        if true {
                             ProgressView()
                                 .scaleEffect(0.6)
                                 .frame(width: 10, height: 10)
@@ -61,7 +60,7 @@ struct MainView: View {
             player
             
         }.padding()
-            .frame(minWidth: 400, minHeight: 400)
+            .frame(minWidth: 450, minHeight: 300)
     }
     
     var player: some View {
@@ -141,7 +140,9 @@ final class MainViewModel: ObservableObject {
         
         if let audio = response.audioData {
             DispatchQueue.main.async {
-                self.data = audio
+                withAnimation {
+                    self.data = audio
+                }
             }
         }
     }
