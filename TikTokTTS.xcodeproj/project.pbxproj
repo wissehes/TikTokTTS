@@ -60,7 +60,7 @@
 		8969C9F529C1ED09001A6865 /* TikTokTTS */ = {
 			isa = PBXGroup;
 			children = (
-				8969CA1029C21E9A001A6865 /* Types */,
+				8969CA1029C21E9A001A6865 /* Structs */,
 				8969CA0529C1ED14001A6865 /* Views */,
 				8969C9F629C1ED09001A6865 /* TikTokTTSApp.swift */,
 				8969C9F829C1ED09001A6865 /* ContentView.swift */,
@@ -88,12 +88,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		8969CA1029C21E9A001A6865 /* Types */ = {
+		8969CA1029C21E9A001A6865 /* Structs */ = {
 			isa = PBXGroup;
 			children = (
 				8969CA1129C21EA3001A6865 /* TTSResponse.swift */,
 			);
-			path = Types;
+			path = Structs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
