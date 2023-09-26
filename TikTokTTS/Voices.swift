@@ -40,6 +40,8 @@ extension Voices {
 }
 
 // Thanks to https://github.com/oscie57/tiktok-voice/wiki/Voice-Codes
+// And https://github.com/Steve0929/tiktok-tts/blob/main/README.md
+// TODO: Organize voices better and remove duplicates
 let voices: Voices = [
     "Disney": [
         .init(code: "en_us_ghostface", name: "Ghost"),
@@ -72,7 +74,41 @@ let voices: Voices = [
         .init("en_male_narration", "Narrator"),
         .init("en_male_funny", "Wacky"),
         .init("en_female_emotional", "Peaceful"),
-        .init("en_male_cody", "Serious")
+        .init("en_male_cody", "Serious"),
+        .init("en_male_jomboy", "Game On"),
+        .init("es_mx_002", "Warm"),
+        .init("en_us_ghostface", "Scream"),
+        .init("en_female_samc", "Empathetic"),
+        .init("en_female_makeup", "Beauty Guru"),
+        .init("en_female_richgirl", "Bestie"),
+        .init("en_male_grinch", "Trickster"),
+        .init("en_male_narration", "Story Teller"),
+        .init("en_male_deadpool", "Mr. GoodGuy"),
+        .init("en_male_jarvis", "Alfred"),
+        .init("en_male_ashmagic", "ashmagic"),
+        .init("en_male_olantekkers", "olantekkers"),
+        .init("en_male_ukneighbor", "Lord Cringe"),
+        .init("en_male_ukbutler", "Mr. Meticulous"),
+        .init("en_female_shenna", "Debutante"),
+        .init("en_female_pansino", "Varsity"),
+        .init("en_male_trevor", "Marty"),
+        .init("en_female_f08_twinkle", "Pop Lullaby"),
+        .init("en_male_m03_classical", "Classic Electric"),
+        .init("en_female_betty", "Bae"),
+        .init("en_male_cupid", "Cupid"),
+        .init("en_female_grandma", "Granny"),
+        .init("en_male_m2_xhxs_m03_christmas", "Cozy"),
+        .init("en_male_santa_narration", "Author"),
+        .init("en_male_sing_deep_jingle", "Caroler"),
+        .init("en_male_santa_effect", "Santa"),
+        .init("en_female_ht_f08_newyear", "NYE 2023"),
+        .init("en_male_wizard", "Magician"),
+        .init("en_female_ht_f08_halloween", "Opera"),
+        .init("en_male_sing_funny_thanksgiving", "Thanksgiving"),
+        .init("en_us_007", "Professor"),
+        .init("en_us_009", "Scientist"),
+        .init("en_us_010", "Confidence"),
+        .init("en_au_002", "Smooth")
     ],
     "French": [
         .init("fr_001", "Male 1"),
